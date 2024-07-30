@@ -15,7 +15,7 @@ void A2(int S[],int start,int n){
 	}else{
 		for(int i=start;i<n;++i){
 				swap(S[start],S[i]);
-				A2(n,S,start+1);
+				A2(S,start+1,n);
 				swap(S[start],S[i]);
 		}
 	}
