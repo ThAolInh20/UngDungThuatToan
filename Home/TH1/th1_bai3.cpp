@@ -1,37 +1,38 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
+
 int x[100];
 int dd[100];
-void printSub(int arr[],int k){
-	for(int i=0;i<k;i++){
-		cout<<arr[x[i]];
-	}
-	cout<<endl;
+
+void ht(int arr[], int k){
+    for(int i = 1; i <= k; i++){
+        cout << arr[x[i] - 1] << " ";  // Adjusting indexing for 1-based to 0-based
+    }
+    cout << endl;
 }
-void sinhToHop(int arr[],int n,int k,int index){
-	int last=(index==1)?0:x[index-1];
-	for(int i=last+1;i<=n;i++){
-		if(dd[i]==0){
-			x[index]=i;
-			if(index==k){
-				printSub(arr,k);
-			}else{
-				dd[i]=1;
-				sinhToHop(arr,n,k,index+1);
-				dd[i]=0;
-			}
-		}
-	}
+
+void tohop(int arr[], int n, int k, int index){
+    int last = (index == 1) ? 0 : x[index - 1];
+    for(int i = last + 1; i <= n; i++){
+        if(dd[i] == 0){
+            x[index] = i;
+            if(index == k){
+                ht(arr, k);
+            } else {
+                dd[i] = 1;
+                tohop(arr, n, k, index + 1);
+                dd[i] = 0;
+            }
+        }
+    }
 }
+
 int main(){
-	int n,k;
-	cout<<"nhap n:";
-	cin>>n;
-	cout<<"nhap k:";
-	cin>>k;
-	int arr[100]={1,2,3,4,5,6,7,8};
-	for(int i=0;i<n;i++){
-		dd[i]=0;
-	}
-	sinhToHop(arr,n,k,1);
+    int arr[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+    for(int i = 0; i <= 8; i++){  // Proper initialization considering bounds
+        dd[i] = 0;
+    }
+    tohop(arr, 8, 6, 1);
+    return 0;
 }
+
